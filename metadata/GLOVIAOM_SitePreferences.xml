@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="GLOVIA_ClientId">
+                <display-name xml:lang="en">Client Id</display-name>
+                <description xml:lang="en">Client Id from the Connected App created for Commerce Cloud Integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>test</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="GLOVIA_ClientSecret">
+                <display-name xml:lang="en">Client Secret</display-name>
+                <description xml:lang="en">Client Secret from the Connected App created for Commerce Cloud Integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>test</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="GLOVIA_InstanceType">
+                <display-name xml:lang="en">Instance Type</display-name>
+                <description xml:lang="en">Instance Type - Production or Test</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>test</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="GLOVIA_Password">
+                <display-name xml:lang="en">Password</display-name>
+                <description xml:lang="en">Password for GLOVIA OM application</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>test</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="GLOVIA_UserName">
+                <display-name xml:lang="en">User Name</display-name>
+                <description xml:lang="en">User name for GLOVIA OM app</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>test</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="GLOVIA_OMS_Config">
+                <display-name xml:lang="en">GLOVIA OMS Config</display-name>
+                <attribute attribute-id="GLOVIA_UserName"/>
+                <attribute attribute-id="GLOVIA_ClientId"/>
+                <attribute attribute-id="GLOVIA_ClientSecret"/>
+                <attribute attribute-id="GLOVIA_Password"/>
+                <attribute attribute-id="GLOVIA_InstanceType"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>
