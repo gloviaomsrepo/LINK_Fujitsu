@@ -18,7 +18,7 @@ function getToken(){
 	org.password = sitePrefGLOVIA.getCustom()["GLOVIA_Password"];
 	
 	LOGGER.debug('PROD_OR_SB' + org.PROD_OR_SB +
-			 ' clientId ' + http.statusCode + 'clientSecret' + org.clientSecret +
+			 ' clientId ' + org.clientId + 'clientSecret' + org.clientSecret +
 			 ' org.username ' + org.username + 'org.username ' + org.username + 'org.password ' + org.password);
 	
 	org.access_token = "";
