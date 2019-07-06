@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="GLOVIAOM_ServiceName">
+                <display-name xml:lang="x-default">GLOVIAOM ServiceName</display-name>
+                <display-name xml:lang="en">GLOVIAOM ServiceName</display-name>
+                <description xml:lang="x-default">Enter Service Name which you have setup in Service framework</description>
+                <description xml:lang="en">Enter Service Name which you have setup in Service framework</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>               
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="GLOVIA_OM_Config">
+                <display-name xml:lang="en">GLOVIA OM Config</display-name>
+                <attribute attribute-id="GLOVIAOM_ServiceName"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+	<type-extension type-id="ServiceCredential">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="ClientId">
+                <display-name xml:lang="x-default">Client Id</display-name>
+                <display-name xml:lang="en">Client Id</display-name>
+                <description xml:lang="x-default">Client Id from the Connected App created for Commerce Cloud Integration</description>
+                <description xml:lang="en">Client Id from the Connected App created for Commerce Cloud Integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="ClientSecret">
+                <display-name xml:lang="x-default">Client Secret</display-name>
+                <display-name xml:lang="en">Client Secret</display-name>
+                <description xml:lang="x-default">Client Secret from the Connected App created for Commerce Cloud Integration</description>
+                <description xml:lang="en">Client Secret from the Connected App created for Commerce Cloud Integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="GLOVIA_OM_Config">
+                <display-name xml:lang="en">GLOVIA OM Config</display-name>
+                <attribute attribute-id="ClientId"/>
+                <attribute attribute-id="ClientSecret"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>
