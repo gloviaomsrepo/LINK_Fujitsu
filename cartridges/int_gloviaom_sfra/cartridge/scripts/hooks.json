@@ -2,7 +2,7 @@
 	"hooks": [
 		{
 			"name": "dw.ocapi.shop.order.beforePATCH",
-			"script": "./hooks/GLOVIAOMS_Order.js"
+			"script": "./hooks/GloviaOm_Order.js"
 		}
 	]
 }
