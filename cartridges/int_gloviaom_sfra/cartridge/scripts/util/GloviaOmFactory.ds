@@ -1,0 +1,32 @@
+'use strict';
+
+var __GloviaOmLinkFactory : Object = {
+	FEATURES : {
+		TOKEN:			"TOKEN",
+		ORDER_CREATE:   "ORDER_CREATE"
+	},	
+	CONFIGURATIONS: {
+		TOKEN:{
+			CONTENT_TYPE: 	"application/x-www-form-urlencoded; charset=UTF-8",
+			METHOD_TYPE:	"POST"
+		},
+		ORDER_CREATE:{
+			CONTENT_TYPE: "application/json",
+			METHOD_TYPE:		"POST",
+			ORDER_STAGING_SUFFIX:		"/services/data/v43.0/composite/tree/gii__SalesOrderStaging__c"
+		}
+	},
+	STATUS_CODES: {
+		RESPONSE_OBJECT:			"RESPONSE",
+		EXCEPTION_OBJECT:			"EXCEPTION",
+		SERVICE_RESULT:				"RESULT",
+		GENERAL: {
+			SERVICE_NOT_ENABLED: 	"ServiceNotEnabledFromPreferences",
+			SUCCESS: 				"Success",
+			SUCCESS_ERROR: 			"StatusCodeNot200Error_SomethingHappenedFrom_(result.error != 0 || result.errorMessage != null || result.mockResult)",
+			EXCEPTION_ERROR: 		"CatchBlockExecuted_SomeException_Ocuured"
+		}
+	}
+}
+
+module.exports=__GloviaOmLinkFactory;

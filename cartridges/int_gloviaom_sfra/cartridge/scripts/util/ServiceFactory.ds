@@ -1,0 +1,127 @@
+'use strict';
+/* Script Modules */
+var Status = require('dw/system/Status');
+var ServiceConfig = require('dw/svc/ServiceConfig');
+var ServiceCredential = require('dw/svc/ServiceCredential');
+var ServiceRegistry = require('dw/svc/ServiceRegistry');
+var HTTPService = require('dw/svc/HTTPService');
+var HTTPClient = require('dw/net/HTTPClient');
+var Encoding = require('dw/crypto/Encoding');
+var Bytes = require('dw/util/Bytes');
+var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
+var GloviaOmFactory = require('~/cartridge/scripts/util/GloviaOmFactory');
+
+var __ServiceFactory : Object = {
+	//Returns Service object
+	getServiceRegistry: function (args) {
+		return __ServiceFactory.setServiceRegistry(args);
+	},
+	// Sets Service Configurations
+	setServiceRegistry: function (args) {		
+				
+		//Set Cuatom Configs in Arguments
+		args.configs = GloviaOmFactory.CONFIGURATIONS[args.feature];
+		
+		// get the service object
+		var serviceObject = __ServiceFactory.createServiceObject(args);
+
+		// create service object using local registery
+		var service = LocalServiceRegistry.createService(args.serviceName, serviceObject);
+
+		return service;
+	},
+	// Create Service Object
+	createServiceObject: function (args) {
+		var tempArgs = args;
+		var serviceObject = {
+			/**
+			* createRequest()
+			* This function used for creating and preparing request.
+			*/
+			createRequest: function(svc, args){
+				/* Setting Header Parameters */
+				svc.addHeader("Content-Type", tempArgs.configs.CONTENT_TYPE);
+				var serviceConfig: ServiceConfig = svc.getConfiguration();
+				var credentials: ServiceCredential = serviceConfig.getCredential();
+			
+				//Set Request Method Based on Configs
+				svc.setRequestMethod(tempArgs.configs.METHOD_TYPE);
+
+				if(args) {
+					return args;
+				}
+				else {
+					return null;
+				}
+			},
+			/**
+			* parseResponse()
+			*	This function used for parsing response.
+			*/
+			parseResponse: function(svc, client) {
+				if (client.statusCode >= 200 && client.statusCode <300) {
+					return client.text;
+				}
+				else {
+					return {
+						statusCode		: client.statusCode,
+						statusMessage	: client.statusMessage,
+						errorText		: client.errorText,
+						responseMessage : client.text
+					};
+				}
+			},
+			/**
+			* filterLogMessage()
+			*	This function filters logs messages if required.
+			*/
+			filterLogMessage: function(msg : String) {
+				return msg;
+			},
+			/**
+			* getRequestLogMessage()
+			*	This function handles how the request is logged.
+			*/
+			getRequestLogMessage : function(requestObj : Object) : String {
+				try {
+					var jsonString = JSON.stringify(requestObj);
+					return jsonString;
+				} catch(e) {}
+				return requestObj;
+			},
+			/**
+			* getResponseLogMessage()
+			*	This function handles how the response is logged.
+			*/
+			getResponseLogMessage : function(responseObj : Object) : String {
+				if (responseObj instanceof dw.net.HTTPClient) {
+					try {
+						return responseObj.text;
+					} catch(e) {}
+				}
+				return responseObj;
+			},			
+			/**
+			* mockCall()
+			*	This function used for returining mocked response when service is mocked.
+			*/
+			mockCall: function(svc, requestObj){
+				return {
+					statusCode: 200,
+					statusMessage: "Success",
+					text: "MOCK RESPONSE (" + svc.URL + ")"
+				};
+			},
+			/**
+			* mockFull()
+			*	Override this method to mock the entire service call, including the createRequest, execute, and parseResponse phases.
+			*/
+			mockFull: function(svc, args){
+				return;
+			}
+		};
+		return serviceObject;
+	}	
+}
+
+module.exports=__ServiceFactory;
