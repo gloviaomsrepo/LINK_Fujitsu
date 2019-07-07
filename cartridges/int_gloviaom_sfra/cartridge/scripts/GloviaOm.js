@@ -5,8 +5,12 @@ var OAuthLoginFlowMgr = require('dw/customer/oauth/OAuthLoginFlowMgr');
 var Transaction = require('dw/system/Transaction');
 var OrderMgr = require('dw/order/OrderMgr');
 var URLUtils = require('dw/web/URLUtils');
-var TOKEN = require('~/cartridge/scripts/util/GLOVIAOMS_Token');
+var TOKEN = require('~/cartridge/scripts/util/GloviaOm_Token');
 var LOGGER = require('dw/system/Logger');
+var Status = require('dw/system/Status');
+var ServiceFactory = require('~/cartridge/scripts/util/ServiceFactory');
+var GloviaOmFactory = require('~/cartridge/scripts/util/GloviaOmFactory');
+var Site = require('dw/system/Site');
 
 function createOrderWithLines(orderNo){	
     
@@ -109,30 +113,42 @@ function createOrderWithLines(orderNo){
 	
 	var resData = "";
 	
+	//get token
 	var org = TOKEN.getToken();
-	var url = org.instance_url + '/services/data/v43.0/composite/tree/gii__SalesOrderStaging__c';
-    var http = new dw.net.HTTPClient();
-    http.setTimeout(30000);
-	http.open('POST', url);
-	http.setRequestHeader('Content-Type', 'application/json');
-	http.setRequestHeader('Authorization', org.token_type + ' ' + org.access_token);
 	
+	//get Site preference
+	var sitePref = Site.getCurrent().getPreferences();
+	var serviceFrameworkName = sitePref.getCustom()["GLOVIAOM_ServiceName"];
 	
+	// create service object using local registery
+	var service = ServiceFactory.getServiceRegistry({
+													serviceName : serviceFrameworkName,
+													feature : GloviaOmFactory.FEATURES.ORDER_CREATE
+												});
+												
+	service.addHeader('Authorization', org.token_type + ' ' + org.access_token);
+	service.setURL(org.instance_url + GloviaOmFactory.CONFIGURATIONS.ORDER_CREATE.ORDER_STAGING_SUFFIX);
 	
-	http.send(body);
-    var responseBody = http.getText();
-	
-	if (http.statusCode >= 200 && http.statusCode < 300 && responseBody) {
-		data = JSON.parse(http.getText());
-		return  JSON.stringify(data);		
-	} else {
-		LOGGER.debug('Got an error calling:' + url +
-				 '. The status code is:' + http.statusCode + ' ,the text is:' + responseBody +
-				 ' and the error text is:' + http.getErrorText());
+	// make the call
+	var result = service.call(body);
+	var responseObj;
+	//error case
+	if (result.error != 0 || result.errorMessage != null || result.mockResult) {
+		//setting response object in status
+		responseObj = JSON.parse(result.object);
+		returnStatus = new Status(Status.ERROR, GloviaOmFactory.STATUS_CODES.GENERAL.SUCCESS_ERROR);
+		if(result && 'object' in result) {
+			returnStatus.addDetail(GloviaOmFactory.STATUS_CODES.RESPONSE_OBJECT, result.object);
+		}
+	}else{
+		//setting response object in status
+		responseObj = JSON.parse(result.object);		
+		LOGGER.debug('::::gloviaom-staging-data='+ JSON.stringify(responseObj));
 	}
+	
 	return resData;
 };
-//exports.GetToken.public = true;
+
 module.exports = {
 	createOrderWithLines: createOrderWithLines
 };
