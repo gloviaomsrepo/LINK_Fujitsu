@@ -4,7 +4,7 @@ var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 
 var server = require('server');
 server.extend(module.superModule);
-var GLOVIAOMS = require('~/cartridge/scripts/GLOVIAOMS');
+var GLOVIAOM = require('~/cartridge/scripts/GloviaOm');
 var LOGGER = require('dw/system/Logger');
 
 
@@ -14,7 +14,7 @@ server.prepend('Confirm',
     csrfProtection.generateToken,
     function (req, res, next) {
         if (req.currentCustomer.raw.isAuthenticated()) {
-			var resData = GLOVIAOMS.createOrderWithLines(req.querystring.ID);
+			var resData = GLOVIAOM.createOrderWithLines(req.querystring.ID);
         }
         next();
     });
