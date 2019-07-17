@@ -4,6 +4,7 @@
   "description": "New overlay cartridge",
   "main": "index.js",
   "scripts": {
+    "test:integration": "sgmf-scripts --integration 'test/integration/**/*.js'",
     "lint": "sgmf-scripts --lint js && sgmf-scripts --lint css",
     "upload": "sgmf-scripts --upload -- ",
     "uploadCartridge": "sgmf-scripts --uploadCartridge int_gloviaom_sfra",
@@ -12,24 +13,39 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-subset": "^1.6.0",
     "css-loader": "^2.1.1",
     "eslint": "^3.2.2",
     "eslint-config-airbnb-base": "^5.0.1",
     "eslint-plugin-import": "^1.12.0",
+    "install-peers": "^1.0.3",
     "istanbul": "^0.4.4",
     "mocha": "^5.2.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.12.0",
     "postcss-loader": "^2.1.5",
     "proxyquire": "1.7.4",
+    "request-promise": "^4.2.2",
     "sass-loader": "^7.0.3",
-    "sgmf-scripts": "^2.0.0",
+    "sgmf-scripts": "^2.3.0",
     "sinon": "^1.17.4",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^12.0.0",
     "stylelint-scss": "^3.8.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalesforceCommerceCloud/link_fujitsu.git"
+  },
+  "license": "ISC",
   "browserslist": [
     "last 2 versions",
     "ie >= 10"
-  ]
+  ],
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "ajv-errors": "^1.0.1",
+    "base-64": "^0.1.0",
+    "js-base64": "^2.5.1",
+    "request-promise": "^4.2.4"
+  }
 }
