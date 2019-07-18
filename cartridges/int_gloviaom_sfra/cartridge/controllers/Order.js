@@ -18,4 +18,16 @@ server.prepend('Confirm',
         }
         next();
     });
+server.prepend('Details',
+	    server.middleware.https,
+	    consentTracking.consent,
+	    csrfProtection.generateToken,
+	    function (req, res, next) {
+	        if (req.currentCustomer.raw.isAuthenticated()) {
+	                                                LOGGER.debug("::Order Details::");
+	                                                var resData = GLOVIAOM.createOrderWithLines(req.querystring.orderID);
+	                                                LOGGER.debug("::resData="+ resData);
+	        }
+	        next();
+	    });
 module.exports = server.exports();
