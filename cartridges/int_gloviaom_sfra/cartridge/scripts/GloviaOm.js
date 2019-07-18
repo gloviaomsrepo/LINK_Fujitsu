@@ -78,12 +78,13 @@ function createOrderWithLines(orderNo){
     			productLinesJSON += ',';
     		}
     		var total_price = orderLines[i].price+orderLines[i].tax;
+    		var productLineItem= orderLines[i];
 			productLinesJSON +='{'
 								 +'       "attributes": {'
 								   +'       "type": "gii__SalesOrderLineStaging__c",'
 								  +'        "referenceId": "'+ orderLines[i].orderItem.itemID + '"'
 								   +'     },';
-			productLinesJSON += '"giic_ProductSKU__c": "'+orderLines[i].product.UPC+'","giic_OrderQuantity__c":"'+ orderLines[i].quantity+ '","giic_UnitPrice__c":"'+orderLines[i].price+'"';
+			productLinesJSON += '"giic_ProductSKU__c": "'+productLineItem.getProductID()+'","giic_OrderQuantity__c":"'+ orderLines[i].quantity+ '","giic_UnitPrice__c":"'+orderLines[i].price+'"';
 			productLinesJSON += ',"giic_LineNo__c":"'+orderLines[i].orderItem.itemID  +'"';
 																																						productLinesJSON += ',"giic_TaxAmount__c":"'+orderLines[i].tax  +'"';
 																																						productLinesJSON += ',"giic_LineDescription__c":"'+orderLines[i].productName  +'"';
