@@ -175,9 +175,10 @@ describe('Getting the access token', function () {
           };
 
           return request(myRequestNew, function (errorNew, responseNew) {
+            var bodyAsJsonNew = responseNew.body;
             assert.equal(responseNew.statusCode, 200, 'Update External Order number call should return statusCode of 200');
-            assert.containSubset(bodyAsJson.order_no, expectedBodyOrder.order_no, 'Actual response. Order number must match.');
-            assert.containSubset(bodyAsJson.site_id, expectedBodyOrder.site_id, 'Actual response. Site Id must match.');
+            assert.containSubset(bodyAsJsonNew.order_no, expectedBodyOrder.order_no, 'Actual response. Order number must match.');
+            assert.containSubset(bodyAsJsonNew.site_id, expectedBodyOrder.site_id, 'Actual response. Site Id must match.');
           });
         });
       });
