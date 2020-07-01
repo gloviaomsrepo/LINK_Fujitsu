@@ -8,10 +8,10 @@ chai.use(chaiSubset);
 
 
 describe('Getting the access token', function () {
-  var usr = 'demouser';
-  var pwd = 'Alchemist@99';
+  var usr = 'ABhatnagar';
+  var pwd = 'FujitsuStore$2021';
   var siteId = 'RefArch';
-  var orderNo = '00000708';
+  var orderNo = '00007505';
 
   var clientPwd = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
   var clientId = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
@@ -73,7 +73,7 @@ describe('Getting the access token', function () {
           };
 
           var expectedBodyOrder = {
-            '_v': '19.5',
+            '_v': '20.1',
             '_type': 'order',
             '_resource_state': '490c1479efaeeff3e87094270e81641a6cebfe4709deab9f9f4a74ae5becc429',
             'adjusted_merchandize_total_tax': 25,
