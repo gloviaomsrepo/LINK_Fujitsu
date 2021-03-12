@@ -55,7 +55,7 @@
     "circular-dependency-plugin": "^5.2.0",
     "handlebars": "^4.7.6",
     "js-base64": "^2.5.1",
-    "madge": "^3.9.2",
+    "madge": "^4.0.1",
     "minimist": "^1.2.5",
     "natives": "^1.1.6"
   }
