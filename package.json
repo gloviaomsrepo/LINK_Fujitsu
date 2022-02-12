@@ -12,7 +12,7 @@
     "compile:scss": "sgmf-scripts --compile css"
   },
   "devDependencies": {
-    "ajv": "^5.5.2",
+    "ajv": "^6.12.3",
     "babel-eslint": "^8.2.6",
     "base": "^3.0.0",
     "base-scss": "^0.1.3",
