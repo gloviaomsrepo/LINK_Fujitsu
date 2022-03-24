@@ -56,7 +56,7 @@
     "handlebars": "^4.7.6",
     "js-base64": "^2.5.1",
     "madge": "^3.9.2",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "natives": "^1.1.6"
   }
 }
